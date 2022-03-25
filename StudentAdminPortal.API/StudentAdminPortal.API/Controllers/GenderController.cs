@@ -1,0 +1,34 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using StudentAdminPortal.API.DataModels;
+using StudentAdminPortal.API.Repositories;
+
+namespace StudentAdminPortal.API.Controllers
+{
+    [ApiController]
+    public class GenderController : Controller
+    {
+        private readonly IMapper mapper;
+        private readonly IStudentRepository studentRepository;
+        public GenderController(IStudentRepository studentRepository, IMapper mapper)
+        {
+            this.studentRepository = studentRepository;
+            this.mapper = mapper;
+        }
+
+        [HttpGet]
+        [Route("[controller]")]
+        public async Task<IActionResult> GetAllGenders()
+        {
+            var genderList = await studentRepository.GetGendersAsync();
+            if(genderList == null || !genderList.Any())
+            {
+                return NotFound();
+            }
+            return Ok(mapper.Map<List<Gender>>(genderList));
+        }
+    }
+}
