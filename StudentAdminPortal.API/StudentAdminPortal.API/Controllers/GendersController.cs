@@ -9,11 +9,11 @@ using StudentAdminPortal.API.Repositories;
 namespace StudentAdminPortal.API.Controllers
 {
     [ApiController]
-    public class GenderController : Controller
+    public class GendersController : Controller
     {
         private readonly IMapper mapper;
         private readonly IStudentRepository studentRepository;
-        public GenderController(IStudentRepository studentRepository, IMapper mapper)
+        public GendersController(IStudentRepository studentRepository, IMapper mapper)
         {
             this.studentRepository = studentRepository;
             this.mapper = mapper;
